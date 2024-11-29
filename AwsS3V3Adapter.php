@@ -509,7 +509,7 @@ class AwsS3V3Adapter implements FilesystemAdapter, PublicUrlGenerator, ChecksumP
     {
         try {
             $options = $config->get('get_object_options', []);
-            $command = $this->client->getCommand('GetObject', [
+            $command = $this->client->getCommand($config->get('put') ? 'PutObject' : 'GetObject', [
                     'Bucket' => $this->bucket,
                     'Key' => $this->prefixer->prefixPath($path),
                 ] + $options);
